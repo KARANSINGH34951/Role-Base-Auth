@@ -1,19 +1,33 @@
 import express from "express"
 import mongoose from "mongoose"
 import dotenv from "dotenv"
+dotenv.config()
 import cors from "cors"
-import ConfigDB from './config/ConfigDB'
+import {ConfigDB} from './config/ConfigDB.js'
+import AuthRouter from './routes/Auth.js'
 
 const app=express();
+const PORT= process.env.PORT || 5000;
 
+//route
+app.use(express.json())
+
+app.use("/auth",AuthRouter)
 
 
 app.get("/",(req,res)=>{
-  res.json("Hello World");
+  res.json({message:"Welcome to MERN Stack"});
 })
 
-app.listen(3000,()=>{
-  ConfigDB();
-  console.log("server running..");
-  
+
+
+ConfigDB()
+.then(()=>{
+  console.log("database connected..");
+  app.listen(PORT,()=>{
+    console.log("server running..",PORT);
+    
+  })  
+}).catch(err=>{
+  console.log("error occur: ",err);
 })

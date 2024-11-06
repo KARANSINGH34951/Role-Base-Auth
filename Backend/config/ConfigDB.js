@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const ConfigDB = async () => {
+export const ConfigDB = async () => {
     try {
         const connect = await mongoose.connect("mongodb://127.0.0.1:27017/rolebaseauth");
         console.log(`MongoDB Connected`);
@@ -10,4 +10,3 @@ const ConfigDB = async () => {
     }
 }
 
-export default ConfigDB;
