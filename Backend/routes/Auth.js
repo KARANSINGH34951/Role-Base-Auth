@@ -50,12 +50,12 @@ AuthRouter.post("/login",async (req,res)=>{
           //add the token inside the cookies as the response to the user
 
           res.cookie("token",token,{httpOnly:true})
-          res.send(user)
+          res.json({message:"login successfull",user})
         }
         else{
           res.send("email or password is wrong")
         }
-    }7    
+    }   
   } catch (error) {
     res.status(401).send("Unauthorized request");
   }

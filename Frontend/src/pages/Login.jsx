@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../redux/store/UserSlice';
+import { setUser } from '../redux/store/UserSlice.js';
 
 const Login = () => {
   const dispatch = useDispatch();
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
+  const [formData, setFormData] = useState({ email: '', password: '' });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,9 +15,7 @@ const Login = () => {
   const loginUser = async () => {
     try {
       const response = await axios.post('http://localhost:3444/auth/login', formData);
-      
       dispatch(setUser(response.data));
-
       console.log('Login successful:', response.data);
     } catch (error) {
       console.error('Login failed:', error);
@@ -30,12 +25,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await loginUser();
-    
-   
-    setFormData({
-      email: '',
-      password: ''
-    });
+    setFormData({ email: '', password: '' });
   };
 
   return (
